@@ -1,4 +1,5 @@
 import './NavBar.css';
+import CardWidget from './CardWidget';
 import logo from './../assets/logo-danny.png';
 
 export const NavBar = () => {
@@ -51,6 +52,9 @@ export const NavBar = () => {
               <a className="nav-link" href="#">Zapatos</a>
             </li>
           </ul>
+        </div>
+        <div>
+            <CardWidget />
         </div>
       </div>
     </nav>

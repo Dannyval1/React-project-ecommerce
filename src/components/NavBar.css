@@ -31,7 +31,7 @@
   width: 100%;
   background-image: url("./../assets/main-background1.jpg");
   background-size: cover;
-  position: fixed;
+  /*position: fixed;*/
   z-index: 999;
   width: 100%;
   border-bottom: 1px solid #d8d8d8;
@@ -133,3 +133,13 @@ a.nav-link:hover:after {
 .text-justify {
   text-align: justify;
 }
+
+/* CARDWIDGET JS*/
+
+.btnMarket{
+    background-color: transparent;
+    border: 0;
+    outline: none;
+}
+
+/**** CARDWIDGET JS ****/
