@@ -143,3 +143,51 @@ a.nav-link:hover:after {
 }
 
 /**** CARDWIDGET JS ****/
+
+/* ITEM COUNT JS */
+.group-add-cart{
+  width: 300px;
+  display: block;
+}
+.controls{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: white;
+  border: 1px solid rgb(139, 139, 139);
+  border-radius: 6px;
+  margin-bottom: 15px;
+}
+.value-product{
+  font-size: 18px;
+}
+.btn-minus{
+  background-color: transparent;
+  outline: none;
+  color: #1d52ff;
+  border: none;
+  font-size: 22px;
+}
+.btn-add{
+  background-color: transparent;
+  outline: none;
+  color: #1d52ff;
+  border: none;
+  font-size: 22px;
+}
+
+.btn-add-to-cart{
+  color: #1d52ff;
+  border: 1px solid #1d52ff;
+  border-radius: 6px;
+  background-color: #fff;
+  width: 100%;
+  padding: 8px;
+}
+
+.btn-add-to-cart:hover{
+  color: #fff;
+  background-color: #1d52ff;
+  transition: .3s;
+}
+/**** ITEM COUNT JS ****/
