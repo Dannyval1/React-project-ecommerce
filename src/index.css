@@ -11,3 +11,13 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+/*** SINGLE ITEM ***/
+.single-item{
+  margin-bottom: 15px;
+}
+
+.single-item .card{
+  width: 15rem;
+}
+/*******************/

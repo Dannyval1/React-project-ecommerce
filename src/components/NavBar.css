@@ -146,7 +146,7 @@ a.nav-link:hover:after {
 
 /* ITEM COUNT JS */
 .group-add-cart{
-  width: 300px;
+  width: 100%;
   display: block;
 }
 .controls{
