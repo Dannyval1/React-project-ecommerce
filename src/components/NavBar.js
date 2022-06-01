@@ -1,23 +1,19 @@
-import './NavBar.css';
-import CardWidget from './CardWidget';
-import logo from './../assets/logo-danny.png';
+import "./NavBar.css";
+import CardWidget from "./CardWidget";
+import logo from "./../assets/logo-danny.png";
+import { NavLink } from "react-router-dom";
 
 export const NavBar = () => {
-    return (
-<nav
+  return (
+    <nav
       className="
         navbar navbar-expand-lg navbar-light"
       id="header-two"
     >
       <div className="container">
-        <a className="navbar-brand" href="#">
-          <img
-            src={logo}
-            className="app-logo"
-            alt="Logo"
-            width="75"
-          />
-        </a>
+        <NavLink className="navbar-brand" to={"/"}>
+          <img src={logo} className="app-logo" alt="Logo" width="75" />
+        </NavLink>
         <button
           className="navbar-toggler"
           type="button"
@@ -35,30 +31,28 @@ export const NavBar = () => {
         >
           <ul className="navbar-nav mb-2 mb-lg-0 d-flex main-menu">
             <li className="nav-item">
-              <a className="nav-link active" aria-current="page" href="#"
-                >Inicio</a
-              >
+              <NavLink className="nav-link" to="/category/1">
+                Camisetas Pastel
+              </NavLink>
             </li>
             <li className="nav-item">
-              <a className="nav-link" href="#">Blusas</a>
+              <NavLink className="nav-link" to="/category/2">
+                Camisetas Fuertes
+              </NavLink>
             </li>
             <li className="nav-item">
-              <a className="nav-link" href="#">Camisetas</a>
-            </li>
-            <li className="nav-item">
-              <a className="nav-link" href="#">Pantalones</a>
-            </li>
-            <li className="nav-item">
-              <a className="nav-link" href="#">Zapatos</a>
+              <NavLink className="nav-link" to="/category/3">
+                Camisetas Tropicales
+              </NavLink>
             </li>
           </ul>
         </div>
-        <div>
-            <CardWidget />
+        <div className="counter-adding">
+          <CardWidget />
         </div>
       </div>
     </nav>
-    );
+  );
 };
 
 export default NavBar;

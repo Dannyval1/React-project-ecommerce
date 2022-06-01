@@ -11,6 +11,9 @@ export const CardWidget = () => {
         width="30"
         height="auto"
       />
+      <p className="count-product-added">
+        0
+      </p>
     </button>
   );
 };

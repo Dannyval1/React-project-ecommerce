@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from "react";
 import {ItemDetail} from "./ItemDetail";
 import shirts from "./../mocks/shirts";
+import { useParams } from "react-router-dom";
 
-export const ItemDetailContainer = ({ greeting }) => {
-  const [datos, setDatos] = useState([]);
+export const ItemDetailContainer = () => {
+  const [datos, setDatos] = useState({});
+  const { id } = useParams();
 
   let bringPromise = (array) => {
     return array;
@@ -22,10 +24,8 @@ export const ItemDetailContainer = ({ greeting }) => {
   };
 
   useEffect(() => {
-    promise(2000, bringPromise(shirts))
-      .then((datos) => {
-        setDatos(datos[3]);
-      })
+    promise(2000, shirts.find(item => item.id === parseInt(id)))
+      .then((result) => { setDatos(result)})
       .catch((err) => console.log(err));
   }, []);
 
