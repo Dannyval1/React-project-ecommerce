@@ -12,6 +12,10 @@ export const ItemCount = ({stock, initial}) => {
       if(valueProduct > initial) setValueProduct(valueProduct - 1);
   };
 
+  const addProductToBuy = () => {
+      alert("Tiene " + valueProduct + " productos anexados a su carrito");
+};
+
   return (
     <div className="group-add-cart">
         <div className="controls">
@@ -25,7 +29,7 @@ export const ItemCount = ({stock, initial}) => {
                 +
             </button>
         </div>  
-        <button className="btn-add-to-cart">
+        <button className="btn-add-to-cart" onClick={addProductToBuy}>
             Agregar al carrito
         </button>  
     </div>

@@ -29,7 +29,7 @@ export const ItemDetail = ({ items }) => {
             <div className="d-flex justify-content-between mb-4">
               {sizes.map((size) => {
                 return (
-                  <button className="m-2 tallas" key={items.index}>
+                  <button className="m-2 tallas" key={size.index}>
                     {size}
                   </button>
                 );
