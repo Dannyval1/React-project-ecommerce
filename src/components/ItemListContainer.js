@@ -7,10 +7,6 @@ export const ItemListContainer = () => {
   const [datos, setDatos] = useState([]);
   const { id } = useParams();
 
-  let funcionPromise = (array) => {
-    return array;
-  };
-
   let promesa = (time, task) => {
     return new Promise((resolve, reject) => {
       if (true) {

@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 
 
-export const ItemCount = ({stock, initial}) => {
-  const [valueProduct, setValueProduct] = useState(1);
+export const ItemCount = ({stock, initial, onAdd}) => {
+  const [valueProduct, setValueProduct] = useState(0);
 
   const addToCart = () => {
       if( valueProduct < stock ) setValueProduct(valueProduct + 1);
@@ -11,10 +11,6 @@ export const ItemCount = ({stock, initial}) => {
   const lessToCart = () => {
       if(valueProduct > initial) setValueProduct(valueProduct - 1);
   };
-
-  const addProductToBuy = () => {
-      alert("Tiene " + valueProduct + " productos anexados a su carrito");
-};
 
   return (
     <div className="group-add-cart">
@@ -29,7 +25,7 @@ export const ItemCount = ({stock, initial}) => {
                 +
             </button>
         </div>  
-        <button className="btn-add-to-cart" onClick={addProductToBuy}>
+        <button className="btn-add-to-cart" onClick={() => onAdd(valueProduct)}>
             Agregar al carrito
         </button>  
     </div>
