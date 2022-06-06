@@ -7,10 +7,6 @@ export const ItemDetailContainer = () => {
   const [datos, setDatos] = useState({});
   const { id } = useParams();
 
-  let bringPromise = (array) => {
-    return array;
-  };
-
   let promise = (time, task) => {
     return new Promise((resolve, reject) => {
       if (true) {
