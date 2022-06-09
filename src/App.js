@@ -1,10 +1,14 @@
 import './App.css';
 import Routes from './routes/routes';
+import CartContextProvider from "./components/CartContext";
+
 
 
 function App() {
   return (
-    <Routes />
+    <CartContextProvider>
+      <Routes />
+    </CartContextProvider>
   );
 }
 
