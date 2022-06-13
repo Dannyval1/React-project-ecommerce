@@ -1,9 +1,17 @@
-import React from "react";
+import React, { useContext, useEffect } from "react";
 import iconMarket from "./../assets/market-icon.png";
+import { CartContext } from "./CartContext";
+import { Link } from "react-router-dom";
 
 export const CardWidget = () => {
+  const cartContext = useContext(CartContext);
+
+  useEffect(() => {
+    cartContext.calcProductsQty();
+  })
+  
   return (
-    <button className="btnMarket">
+    <Link to="/cart" className="btnMarket">
       <img
         src={iconMarket}
         className="iconMarket"
@@ -12,9 +20,9 @@ export const CardWidget = () => {
         height="auto"
       />
       <p className="count-product-added">
-        0
+        {cartContext.calcProductsQty()}
       </p>
-    </button>
+    </Link>
   );
 };
 
