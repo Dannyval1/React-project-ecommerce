@@ -1,9 +1,13 @@
+import React, { useContext } from "react";
 import "./NavBar.css";
 import CardWidget from "./CardWidget";
 import logo from "./../assets/logo-danny.png";
 import { NavLink } from "react-router-dom";
+import { CartContext } from "./CartContext";
 
 export const NavBar = () => {
+  const cartContext = useContext(CartContext);
+
   return (
     <nav
       className="
@@ -47,9 +51,11 @@ export const NavBar = () => {
             </li>
           </ul>
         </div>
-        <div className="counter-adding">
-          <CardWidget />
-        </div>
+        {cartContext.cartList.length > 0 ? (
+          <div className="counter-adding">
+            <CardWidget />
+          </div>
+        ) : null}
       </div>
     </nav>
   );

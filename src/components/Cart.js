@@ -1,9 +1,19 @@
 import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import { CartContext } from "./CartContext";
+import { useNavigate } from "react-router-dom";
+import toast, { Toaster } from "react-hot-toast";
 
 const Cart = () => {
   const cartContext = useContext(CartContext);
+  const navigate = useNavigate();
+
+  const finishBuy = () => {
+    cartContext.clear();
+    navigate({
+      pathname: "/",
+    });
+  };
 
   return (
     <div className="cart-page">
@@ -36,31 +46,59 @@ const Cart = () => {
                 </button>
               </div>
             </div>
-            <div className="mt-5">
-              {cartContext.cartList.map((item) => (
-                <div className="row mb-5">
-                  <div className="card card-item col-md-2">
-                    <Link className="link-to-item" to={`/item/${item.id}`}>
-                      <img src={item.pictureUrl} />
-                    </Link>
+            <div className="row mt-5">
+              <div className="col-md-8">
+                {cartContext.cartList.map((item) => (
+                  <div className="row mb-5" key={item.id}>
+                    <div className="card card-item col-md-2">
+                      <Link className="link-to-item" to={`/item/${item.id}`}>
+                        <img src={item.pictureUrl} />
+                      </Link>
+                    </div>
+                    <div className="col-md-3 info-delete-item">
+                      <p>
+                        <b>Product Name:</b> {item.title}
+                      </p>
+                      <button
+                        className="btn delete-item"
+                        onClick={() => cartContext.removeItem(item.id)}
+                      >
+                        Delete
+                      </button>
+                    </div>
+                    <div className="col-md-7 item-cost">
+                      <p>
+                        {item.quantity} Items / ${item.price} each
+                      </p>
+                      <p>$ {cartContext.totalPerItem(item.id)}</p>
+                    </div>
                   </div>
-                  <div className="col-md-3 info-delete-item">
-                    <p>
-                      <b>Product Name:</b> {item.title}
-                    </p>
-                    <button
-                      className="btn delete-item"
-                      onClick={() => cartContext.removeItem(item.id)}
-                    >
-                      Delete
-                    </button>
+                ))}
+              </div>
+              <div className="col-md-4">
+                <div className="summary">
+                  <h3 className="mb-3">ORDER SUMMARY</h3>
+                  <div className="data-summary">
+                    <p>Subtotal</p>
+                    <p>$ {cartContext.calcSubTotal()}</p>
                   </div>
-                  <div className="col-md-7 item-cost">
-                    <p>Items {item.quantity}</p>
-                    <p>{item.price} Each</p>
+                  <div className="data-summary">
+                    <p>Taxes</p>
+                    <p>$ 10000</p>
                   </div>
+                  <div className="data-summary">
+                    <p className="total-text">Total</p>
+                    <p className="total-text">$ {cartContext.calcTotal()}</p>
+                  </div>
+                  <button
+                    className="btn btn-checkout mt-4 mb-2"
+                    onClick={() => finishBuy()}
+                  >
+                    TERMINAR MI COMPRA
+                  </button>
+                  <Toaster />
                 </div>
-              ))}
+              </div>
             </div>
           </div>
         </div>
