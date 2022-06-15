@@ -1,29 +1,20 @@
 import React, { useState, useEffect } from "react";
 import {ItemDetail} from "./ItemDetail";
-import shirts from "./../mocks/shirts";
 import { useParams } from "react-router-dom";
+import { doc, onSnapshot } from "firebase/firestore";
+import { db } from "./FirebaseConfig";
+
 
 export const ItemDetailContainer = () => {
   const [datos, setDatos] = useState({});
   const { id } = useParams();
 
-  let promise = (time, task) => {
-    return new Promise((resolve, reject) => {
-      if (true) {
-        setTimeout(() => {
-          resolve(task);
-        }, time);
-      } else {
-        reject("Error");
-      }
-    });
-  };
-
   useEffect(() => {
-    promise(2000, shirts.find(item => item.id === parseInt(id)))
-      .then((result) => { setDatos(result)})
-      .catch((err) => console.log(err));
-  }, []);
+    onSnapshot(doc(db, "products", id), (doc) => {
+      const itemData = {id: doc.id, ...doc.data()};
+      setDatos(itemData);
+    });
+  }, [id])
 
   return (
     <div className="container">
