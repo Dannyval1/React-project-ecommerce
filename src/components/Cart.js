@@ -3,16 +3,47 @@ import { Link } from "react-router-dom";
 import { CartContext } from "./CartContext";
 import { useNavigate } from "react-router-dom";
 import toast, { Toaster } from "react-hot-toast";
+import { collection, serverTimestamp, setDoc, doc, updateDoc, increment } from "firebase/firestore";
+import { db } from "./FirebaseConfig";
 
 const Cart = () => {
   const cartContext = useContext(CartContext);
   const navigate = useNavigate();
 
-  const finishBuy = () => {
-    cartContext.clear();
-    navigate({
-      pathname: "/",
+  const createOrder = () => {
+    const itemsForDB = cartContext.cartList.map((item) => ({
+      id: item.id,
+      price: item.price,
+      title: item.title,
+      qty: item.quantity,
+    }));
+
+    let order = {
+      buyer: {
+        email: "Danny@email.com",
+        nombre: "Danny",
+        phone: "12355324",
+      },
+      date: serverTimestamp(),
+      items: itemsForDB,
+      total: cartContext.calcTotal(),
+    };
+    const createOrderInFirestore = async () => {
+      const newOrderRef = doc(collection(db, "orders"));
+      await setDoc(newOrderRef, order);
+      return newOrderRef;
+    };
+    createOrderInFirestore()
+      .then((result) => alert("Your ID Orders is " + result.id))
+      .catch((err) => console.log(err));
+
+    cartContext.cartList.forEach(async item => {
+      const itemRef = doc(db, "products", item.id);
+      await updateDoc(itemRef, {
+        stock: increment(-item.quantity)
+      })
     });
+    cartContext.clear();
   };
 
   return (
@@ -92,7 +123,7 @@ const Cart = () => {
                   </div>
                   <button
                     className="btn btn-checkout mt-4 mb-2"
-                    onClick={() => finishBuy()}
+                    onClick={() => createOrder()}
                   >
                     TERMINAR MI COMPRA
                   </button>

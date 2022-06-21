@@ -10,7 +10,7 @@ export const ItemDetail = ({ items }) => {
   const [itemCount, setItemCount] = useState(0);
 
   const notify = (cantidad) => {
-    toast.success(`Usted ha anexado ${cantidad} items al carrito.`)
+    toast.success(`Usted ha anexado ${cantidad} items al carrito.`);
   };
 
   const onAdd = (cantidad) => {
@@ -18,7 +18,7 @@ export const ItemDetail = ({ items }) => {
     cartContext.addItem(items, cantidad);
     notify(cantidad);
   };
-  
+
   return (
     <>
       {items.id === undefined ? (
@@ -44,20 +44,32 @@ export const ItemDetail = ({ items }) => {
               <b>Descripción:</b>
             </p>
             <p className="description-product-detail">{items.description}</p>
-            <p className="info-title-product-detail">
-              <b>Cantidad:</b>
-            </p>
-            <div className="amount-products">
-              {itemCount === 0 ? (
-                <>
-                  <ItemCount stock={5} initial={1} onAdd={onAdd} />
-                </>
-              ) : (
-                <Link to="/cart">
-                  <button className="btn btn-primary">Checkout</button>
-                </Link>
-              )}
-            </div>
+            {items.stock > 0 ? (
+              <>
+                <p className="info-title-product-detail">
+                  <b>Stock:</b> {items.stock}
+                </p>
+                <p className="info-title-product-detail">
+                  <b>Cantidad:</b>
+                </p>
+
+                <div className="amount-products">
+                  {itemCount === 0 ? (
+                    <>
+                      <ItemCount stock={5} initial={1} onAdd={onAdd} />
+                    </>
+                  ) : (
+                    <Link to="/cart">
+                      <button className="btn btn-primary">Checkout</button>
+                    </Link>
+                  )}
+                </div>
+              </>
+            ) : (
+              <p className="info-title-product-detail">
+                No hay stock de este producto
+              </p>
+            )}
           </div>
         </div>
       )}
