@@ -6,10 +6,6 @@ import { Link } from "react-router-dom";
 export const CardWidget = () => {
   const cartContext = useContext(CartContext);
 
-  useEffect(() => {
-    cartContext.calcProductsQty();
-  })
-  
   return (
     <Link to="/cart" className="btnMarket">
       <img

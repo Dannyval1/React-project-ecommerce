@@ -14,6 +14,7 @@ const CartContextProvider = ({ children }) => {
       setCartList([...cartList, item]);
     } else {
       queryInCart.quantity += quantity;
+      setCartList([...cartList]);
     }
   };
 
@@ -27,7 +28,8 @@ const CartContextProvider = ({ children }) => {
   };
 
   const calcProductsQty = () => {
-    return cartList.reduce((prev, item) => prev + item.quantity, 0);
+    const variable = cartList.reduce((prev, item) => prev + item.quantity, 0);
+    return variable;
   };
 
   const totalPerItem = (id) => {

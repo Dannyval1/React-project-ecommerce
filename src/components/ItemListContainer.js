@@ -3,24 +3,34 @@ import ItemList from "./ItemList";
 import { useParams } from "react-router-dom";
 import cargando from "./../assets/progress.gif";
 import { db } from "./FirebaseConfig";
-import { collection, getDocs } from 'firebase/firestore/lite';
-
+import { query, where, collection, getDocs, doc, getDoc  } from "@firebase/firestore";
 
 export const ItemListContainer = () => {
   const [datos, setDatos] = useState([]);
   const { id } = useParams();
 
   useEffect(() => {
-    async function getShirts(db) {
-      const shirtsCol = collection(db, "products");
+    const getShirts = async(db) =>  {
+      let shirtsCol;
+      if (!id) {
+        shirtsCol = collection(db, "products");
+      } else {
+        shirtsCol = query(
+          collection(db, "products"),
+          where("categoryId", "==", Number(id))
+        );
+      }
       const shirtSnapshot = await getDocs(shirtsCol);
-      const shirtList = shirtSnapshot.docs.map((doc) => ({id: doc.id, ...doc.data()}));
+      const shirtList = shirtSnapshot.docs.map((doc) => ({
+        id: doc.id,
+        ...doc.data(),
+      }));
       return shirtList;
     }
     getShirts(db)
-    .then(shirts => setDatos(shirts))
-    .catch(err => console.log(err));;
-  }, []);
+      .then((shirts) => setDatos(shirts))
+      .catch((err) => console.log(err));
+  }, [id]);
 
   return (
     <div className="container">
