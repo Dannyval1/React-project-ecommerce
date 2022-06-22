@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import ItemCount from "./ItemCount";
 import { CartContext } from "./CartContext";
 import cargando from "./../assets/progress.gif";
-import toast, { Toaster } from "react-hot-toast";
+import toast from "react-hot-toast";
 
 export const ItemDetail = ({ items }) => {
   const cartContext = useContext(CartContext);
@@ -23,7 +23,7 @@ export const ItemDetail = ({ items }) => {
     <>
       {items.id === undefined ? (
         <div className="col-md-12 loading">
-          <img src={cargando} width="120" />
+          <img src={cargando} width="120" alt="Logo"/>
           <p>...Cargando...</p>
         </div>
       ) : (

@@ -1,14 +1,12 @@
 import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import { CartContext } from "./CartContext";
-import { useNavigate } from "react-router-dom";
-import toast, { Toaster } from "react-hot-toast";
+import { Toaster } from "react-hot-toast";
 import { collection, serverTimestamp, setDoc, doc, updateDoc, increment } from "firebase/firestore";
 import { db } from "./FirebaseConfig";
 
 const Cart = () => {
   const cartContext = useContext(CartContext);
-  const navigate = useNavigate();
 
   const createOrder = () => {
     const itemsForDB = cartContext.cartList.map((item) => ({
@@ -83,7 +81,7 @@ const Cart = () => {
                   <div className="row mb-5" key={item.id}>
                     <div className="card card-item col-md-2">
                       <Link className="link-to-item" to={`/item/${item.id}`}>
-                        <img src={item.pictureUrl} />
+                        <img src={item.pictureUrl}  alt="Shop-item"/>
                       </Link>
                     </div>
                     <div className="col-md-3 info-delete-item">
